@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/03/06 23:39:09 by arcarval         ###   ########.fr        #
+#    Updated: 2023/03/07 20:38:29 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ YELLOW			=	\033[0;33m
 # FRACTOL
 NAME			=	fractol
 LIBFT			=	./Libft/libft.a
-MLX				=	./libraries/minilibx-linux
+LIBRARIES		=	./libraries/
 HEADER			=	fractol.h
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
@@ -37,18 +37,33 @@ FRACTOL_OBJS	=	$(FRACTOL_SRCS:.c=.o)
 AR				=	ar -rcs
 RM				=	rm -rf
 
+####################
+####  SELECT OS ####
+####################
+ifeq ($(shell uname), Linux)
+	MLX = minilibx-linux
+	MLX_FLAGS = -lbsd -L$(LIBRARIES)$(MLX) -I$(LIBRARIES)$(MLX) -lmlx -L /usr/lib -lXext -lX11 -lm -lz
+	CFLAGS += -DOS=1
+else ifeq ($(shell uname), Darwin)
+	MLX = minilibx_mms
+	MLX_FLAGS = -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -lmlx
+	CFLAGS += -DOS=2
+	CP_CMD = cp $(LIBRARIES)$(MLX)/libmlx.dylib ./
+endif
+
+
 %.o : %.c
 				@echo "$(ORANGE) Compiling  ➟  $(BLUE)$< $(WHITE)"
-				$(CC) $(CFLAGS) -I/usr/include -I$(MLX) -O3 -c $< -o $@
+				$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -O3 -c $< -o $@
 
 $(NAME): 		minilibx libft $(FRACTOL_OBJS)
-				$(CC) $(FRACTOL_OBJS) -L$(MLX) -lmlx -L /usr/lib -I$(MLX) -lXext -lX11 -lm -lz -o $(NAME)
+				$(CC) $(FRACTOL_OBJS) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
 
 libft: 
 				@make -C Libft
 
 minilibx:
-				@make -C $(MLX)
+				@make -C $(LIBRARIES)$(MLX)
 
 all:			$(NAME)
 
@@ -59,7 +74,7 @@ clean:
 fclean:			clean
 				@$(RM) $(NAME)
 				@make fclean -C Libft
-				@make clean -C $(MLX)
+				@make clean -C $(LIBRARIES)$(MLX)
 				@echo "$(CYAN) FRACTOL - Bath is so good!  Now it's over. 🧼✨$(RESET)"
 
 nn:
