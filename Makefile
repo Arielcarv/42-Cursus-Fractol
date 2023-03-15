@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/03/07 20:38:29 by arcarval         ###   ########.fr        #
+#    Updated: 2023/03/15 18:58:37 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ LIBRARIES		=	./libraries/
 HEADER			=	fractol.h
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
-CFLAGS			=	
 
 FRACTOL_SRCS	=	fractol.c
 FRACTOL_OBJS	=	$(FRACTOL_SRCS:.c=.o)
@@ -43,18 +42,18 @@ RM				=	rm -rf
 ifeq ($(shell uname), Linux)
 	MLX = minilibx-linux
 	MLX_FLAGS = -lbsd -L$(LIBRARIES)$(MLX) -I$(LIBRARIES)$(MLX) -lmlx -L /usr/lib -lXext -lX11 -lm -lz
-	CFLAGS += -DOS=1
 else ifeq ($(shell uname), Darwin)
-	MLX = minilibx_mms
-	MLX_FLAGS = -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -lmlx
-	CFLAGS += -DOS=2
-	CP_CMD = cp $(LIBRARIES)$(MLX)/libmlx.dylib ./
+	MLX = minilibx-macos
+	MLX_FLAGS = -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -lmlx -framework OpenGL -framework AppKit
 endif
 
 
 %.o : %.c
 				@echo "$(ORANGE) Compiling  ➟  $(BLUE)$< $(WHITE)"
-				$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -O3 -c $< -o $@
+# LINUX
+#				$(CC) $(CFLAGS) -I$(LIBRARIES)$(MLX) -I/usr/include -I$(LIBRARIES)$(MLX) -O3 -c $< -o $@
+				$(CC) $(CFLAGS) -I$(LIBRARIES)$(MLX) -I/usr/include -I$(LIBRARIES)$(MLX) -O3 -c $< -o $@
+
 
 $(NAME): 		minilibx libft $(FRACTOL_OBJS)
 				$(CC) $(FRACTOL_OBJS) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
