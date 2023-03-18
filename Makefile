@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/03/15 18:58:37 by arcarval         ###   ########.fr        #
+#    Updated: 2023/03/18 19:30:45 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ endif
 				@echo "$(ORANGE) Compiling  ➟  $(BLUE)$< $(WHITE)"
 # LINUX
 #				$(CC) $(CFLAGS) -I$(LIBRARIES)$(MLX) -I/usr/include -I$(LIBRARIES)$(MLX) -O3 -c $< -o $@
-				$(CC) $(CFLAGS) -I$(LIBRARIES)$(MLX) -I/usr/include -I$(LIBRARIES)$(MLX) -O3 -c $< -o $@
+				$(CC) $(CFLAGS) -I$(LIBRARIES)$(MLX) -I/usr/include -I$(LIBRARIES)$(MLX) -c $< -o $@
 
 
 $(NAME): 		minilibx libft $(FRACTOL_OBJS)
