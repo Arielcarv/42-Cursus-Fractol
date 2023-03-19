@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/03/18 19:30:45 by arcarval         ###   ########.fr        #
+#    Updated: 2023/03/19 15:22:37 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,10 @@ LIBFT			=	./Libft/libft.a
 LIBRARIES		=	./libraries/
 HEADER			=	fractol.h
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g
 
 FRACTOL_SRCS	=	fractol.c
-FRACTOL_OBJS	=	$(FRACTOL_SRCS:.c=.o)
+FRACTOL_OBJS	=	$(FRACTOL_SRCS:%.c=%.o)
 
 AR				=	ar -rcs
 RM				=	rm -rf
@@ -40,23 +40,24 @@ RM				=	rm -rf
 ####  SELECT OS ####
 ####################
 ifeq ($(shell uname), Linux)
+	CFLAGS = 
 	MLX = minilibx-linux
-	MLX_FLAGS = -lbsd -L$(LIBRARIES)$(MLX) -I$(LIBRARIES)$(MLX) -lmlx -L /usr/lib -lXext -lX11 -lm -lz
+	MLX_LINKS = -lbsd -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) $(LIBRARIES)$(MLX)/libmlx_Linux.a -L/usr/lib  -lmlx -lXext -lX11 -lm -lz
+	
 else ifeq ($(shell uname), Darwin)
 	MLX = minilibx-macos
-	MLX_FLAGS = -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -lmlx -framework OpenGL -framework AppKit
+	MLX_LINKS = -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -lmlx -framework OpenGL -framework AppKit
 endif
 
 
 %.o : %.c
 				@echo "$(ORANGE) Compiling  ➟  $(BLUE)$< $(WHITE)"
-# LINUX
-#				$(CC) $(CFLAGS) -I$(LIBRARIES)$(MLX) -I/usr/include -I$(LIBRARIES)$(MLX) -O3 -c $< -o $@
-				$(CC) $(CFLAGS) -I$(LIBRARIES)$(MLX) -I/usr/include -I$(LIBRARIES)$(MLX) -c $< -o $@
+				$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -c $< -o $@
+#				$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -I$(LIBRARIES)$(MLX) -c $< -o $@
 
 
 $(NAME): 		minilibx libft $(FRACTOL_OBJS)
-				$(CC) $(FRACTOL_OBJS) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
+				$(CC) $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) -o $(NAME)
 
 libft: 
 				@make -C Libft
