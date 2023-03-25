@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/03/19 15:22:37 by arcarval         ###   ########.fr        #
+#    Updated: 2023/03/25 14:24:43 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,11 @@ YELLOW			=	\033[0;33m
 
 # FRACTOL
 NAME			=	fractol
+HEADER			=	fractol.h
 LIBFT			=	./Libft/libft.a
 LIBRARIES		=	./libraries/
-HEADER			=	fractol.h
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror -g
+CFLAGS			=	-Wall -Wextra -Werror
 
 FRACTOL_SRCS	=	fractol.c
 FRACTOL_OBJS	=	$(FRACTOL_SRCS:%.c=%.o)
@@ -43,7 +43,6 @@ ifeq ($(shell uname), Linux)
 	CFLAGS = 
 	MLX = minilibx-linux
 	MLX_LINKS = -lbsd -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) $(LIBRARIES)$(MLX)/libmlx_Linux.a -L/usr/lib  -lmlx -lXext -lX11 -lm -lz
-	
 else ifeq ($(shell uname), Darwin)
 	MLX = minilibx-macos
 	MLX_LINKS = -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -lmlx -framework OpenGL -framework AppKit
