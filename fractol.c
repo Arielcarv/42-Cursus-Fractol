@@ -6,13 +6,13 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:00:54 by arcarval          #+#    #+#             */
-/*   Updated: 2023/06/14 12:42:17 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:01:44 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int close_mlx(void *mlx)
+int	close_window(void *mlx)
 {
 	mlx_loop_end(mlx);
 	mlx_destroy_display(mlx);
@@ -25,32 +25,17 @@ int	key_events_handler(int keysym, void *mlx)
 {
 	if (keysym == KEY_ESC)
 	{
-		close_mlx(mlx);
+		close_window(mlx);
 	}
 	return (1);
 }
 
 static void	set_pixel_color(char *buf, int x, int y, int color)
 {
-	// buf[x * 4 + y * WINDOW_WIDTH * 4] = color;
-	// buf[x * 4 + y * WINDOW_WIDTH * 4 + 1] = color >> 4;
-	// buf[x * 4 + y * WINDOW_WIDTH * 4 + 2] = color >> 16;
-	// buf[x * 4 + y * WINDOW_WIDTH * 4 + 3] = color >> 24;
-
 	// int	red = 0xFF2200;
 	// int	green = 0x00FF55;
 	// int	yellow = 0xFFFF00;
 	int	blue = 0x0000FF;
-
-	// if (x % 2 == 0 && y % 2 == 0)
-	// 	buf[x * 4 + y * WINDOW_WIDTH * 4] = green;
-	// else if (x % 2 == 0 && y % 2 != 0)
-	// 	buf[x * 4 + y * WINDOW_WIDTH * 4] = yellow;
-	// else if (x % 2 != 0 && y % 2 == 0)
-	// 	buf[x * 4 + y * WINDOW_WIDTH * 4] = red;
-	// else if (x % 2 != 0 && y % 2 != 0)
-	// 	buf[x * 4 + y * WINDOW_WIDTH * 4] = color;
-
 	int	red = 300;
 	int	green = 0xFF << 24 | 0 << 16 | 0 << 8 | 61440;
 	int yellow = 0xFF << 24 | 1 << 16 | 1 << 8 | 0;
@@ -65,8 +50,8 @@ static void	set_pixel_color(char *buf, int x, int y, int color)
 	}
 	else
 	{
-		buf[x * 4 + y * WINDOW_WIDTH * 4] = blue;		//color;
-		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 1] = blue;		// green
+		buf[x * 4 + y * WINDOW_WIDTH * 4] = blue;			//color;
+		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 1] = blue;	// green
 		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 2] = blue;	// red
 		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 3] = blue;	//black
 	}
@@ -74,20 +59,13 @@ static void	set_pixel_color(char *buf, int x, int y, int color)
 
 void	render_fractal(void *mlx, void *mlx_win)
 {
-	int x;
-	int y;
-	double pr;
-	double pi;
-	// int nb_iter;
-	double	min_r = -4.0;
-	double	max_r = 4.0;
-	double	min_i = -4.0;
-	double	max_i = min_i + (max_r - min_r) * WINDOW_HEIGHT / WINDOW_WIDTH;
+	int		x;
+	int		y;
 	void	*img = NULL;
-	int pixel_bits;
-	int line_bytes;
-	int endian;
-	char *buf;
+	int		pixel_bits;
+	int		line_bytes;
+	int		endian;
+	char	*buf;
 
 	mlx_clear_window(mlx, mlx_win);
 	img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -98,10 +76,7 @@ void	render_fractal(void *mlx, void *mlx_win)
 		x = -1;
 		while (++x < WINDOW_WIDTH)
 		{
-			pr = min_r + x * (max_r - min_r) / WINDOW_WIDTH;
-			pi = max_i + y * (min_i - max_i) / WINDOW_HEIGHT;
-			// nb_iter = calculate_fractal(f, pr, pi);
-			set_pixel_color(buf, x, y, 0xFF00AA);
+			set_pixel_color(buf, x, y, 0xFFFFFF);
 		}
 	}
 	mlx_put_image_to_window(mlx, mlx_win, img, 0, 0);
@@ -109,13 +84,13 @@ void	render_fractal(void *mlx, void *mlx_win)
 
 int	main(void)
 {
-	void		*mlx;
+	t_fractol	params;
 	void		*mlx_win;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Hello world!");
-	render_fractal(mlx, mlx_win);
-	mlx_hook(mlx_win, CLOSE_BUTTON, 0, close_mlx, mlx);
-	mlx_key_hook(mlx_win, key_events_handler, mlx);
-	mlx_loop(mlx);
+	initialize_fractol(&params);
+	open_window(&params);
+	render_fractal(params.mlx, params.mlx_win);
+	mlx_hook(params.mlx_win, CLOSE_BUTTON, 0, close_window, params.mlx);
+	mlx_key_hook(params.mlx_win, key_events_handler, params.mlx);
+	mlx_loop(params.mlx);
 }

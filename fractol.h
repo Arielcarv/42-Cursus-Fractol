@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:18:55 by arcarval          #+#    #+#             */
-/*   Updated: 2023/06/12 17:26:22 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:53:49 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # endif
 
 # include "Libft/libft.h"
+# include <stdio.h>
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480
@@ -44,5 +45,15 @@
 # define KEY_UP 65362
 # define KEY_RIGHT 65363
 # define KEY_DOWN 65364
+
+typedef struct s_fractol{
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	char	*buff;
+}			t_fractol;
+
+void	initialize_fractol(t_fractol *params);
+void	open_window(t_fractol *params);
 
 #endif

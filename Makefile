@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/03/25 14:24:43 by arcarval         ###   ########.fr        #
+#    Updated: 2023/07/19 16:46:30 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIBRARIES		=	./libraries/
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 
-FRACTOL_SRCS	=	fractol.c
+FRACTOL_SRCS	=	fractol.c initialize.c
 FRACTOL_OBJS	=	$(FRACTOL_SRCS:%.c=%.o)
 
 AR				=	ar -rcs
@@ -48,12 +48,9 @@ else ifeq ($(shell uname), Darwin)
 	MLX_LINKS = -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -lmlx -framework OpenGL -framework AppKit
 endif
 
-
 %.o : %.c
 				@echo "$(ORANGE) Compiling  ➟  $(BLUE)$< $(WHITE)"
 				$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -c $< -o $@
-#				$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -I$(LIBRARIES)$(MLX) -c $< -o $@
-
 
 $(NAME): 		minilibx libft $(FRACTOL_OBJS)
 				$(CC) $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) -o $(NAME)
@@ -77,7 +74,7 @@ fclean:			clean
 				@echo "$(CYAN) FRACTOL - Bath is so good!  Now it's over. 🧼✨$(RESET)"
 
 nn:
-				norminette -CheckForbiddenSourceHeader $(FRACTOL_SRCS) $(HEADER) ./Libft/*.c ./Libft/*.h
+				norminette -R CheckForbiddenSourceHeader $(FRACTOL_SRCS) $(HEADER) ./Libft/*.c ./Libft/*.h
 
 re:				fclean all
 
