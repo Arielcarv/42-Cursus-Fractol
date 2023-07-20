@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:00:54 by arcarval          #+#    #+#             */
-/*   Updated: 2023/07/19 17:01:44 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:04:19 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	key_events_handler(int keysym, void *mlx)
 	{
 		close_window(mlx);
 	}
+	else
+	{
+		printf("KEYSYM:%d\n", keysym);
+		return (0);
+	}
 	return (1);
 }
 
@@ -42,7 +47,7 @@ static void	set_pixel_color(char *buf, int x, int y, int color)
 	// printf("GREEN %d, YELLOW: %d\n", green, yellow);
 	if ( y == 0 || y == WINDOW_HEIGHT - 1 || x == 0 || x == WINDOW_WIDTH - 1)
 	{
-		printf("BUFFER: %d\n", x * 4 + y * WINDOW_WIDTH * 4);
+		// printf("BUFFER: %d\n", x * 4 + y * WINDOW_WIDTH * 4);
 		// buf[x * 4 + y * WINDOW_WIDTH * 4] = 255 ;		//blue;
 		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 1] = 255 ;	//green;
 		buf[x * 4 + y * WINDOW_WIDTH * 4 + 2] = 255 ;		//red;
