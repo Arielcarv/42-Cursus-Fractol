@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:18:55 by arcarval          #+#    #+#             */
-/*   Updated: 2023/07/19 16:53:49 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:17:40 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,26 @@
 # define KEY_UP 65362
 # define KEY_RIGHT 65363
 # define KEY_DOWN 65364
+# define MOUSE_LEFT 1
+# define MOUSE_MIDDLE 2
+# define MOUSE_RIGHT 3
+# define MOUSE_SCROLL_UP 4
+# define MOUSE_SCROLL_DOWN 5
 
-typedef struct s_fractol{
+typedef struct s_fractol {
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
 	char	*buff;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
 }			t_fractol;
 
-void	initialize_fractol(t_fractol *params);
+void	initialize_params(t_fractol *params);
 void	open_window(t_fractol *params);
+int		close_window(t_fractol *params);
+int		key_events_handler(int keysym, t_fractol *params);
+int		mouse_events_handler(int keysym, t_fractol *params);
 
 #endif

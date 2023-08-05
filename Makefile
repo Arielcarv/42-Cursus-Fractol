@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/07/19 16:46:30 by arcarval         ###   ########.fr        #
+#    Updated: 2023/08/05 13:32:38 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIBRARIES		=	./libraries/
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 
-FRACTOL_SRCS	=	fractol.c initialize.c
+FRACTOL_SRCS	=	fractol.c initialize.c hooks.c
 FRACTOL_OBJS	=	$(FRACTOL_SRCS:%.c=%.o)
 
 AR				=	ar -rcs
