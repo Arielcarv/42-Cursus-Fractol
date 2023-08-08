@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/08/05 13:32:38 by arcarval         ###   ########.fr        #
+#    Updated: 2023/08/08 19:10:26 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,10 @@ WHITE			=	\033[0;37m
 YELLOW			=	\033[0;33m
 
 # FRACTOL
-NAME			=	fractol
+NAME			=	fractol.a
 HEADER			=	fractol.h
 LIBFT			=	./Libft/libft.a
+FT_PRINTF		=	./ft_printf/libftprintf.a
 LIBRARIES		=	./libraries/
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
@@ -50,16 +51,21 @@ endif
 
 %.o : %.c
 				@echo "$(ORANGE) Compiling  ➟  $(BLUE)$< $(WHITE)"
-				$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -c $< -o $@
+				@$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -c $< -o $@
 
-$(NAME): 		minilibx libft $(FRACTOL_OBJS)
-				$(CC) $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) -o $(NAME)
-
-libft: 
-				@make -C Libft
+$(NAME):		minilibx libft 42_printf $(FRACTOL_OBJS)
+				@echo "$(MAGENTA)\n $(NAME)  🗄️  🗃️  Archived ✓$(RESET)"
+				$(CC) $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
+				@echo "$(CYAN) FRACTOL - I'm ready to work! 🧠$(RESET)"
 
 minilibx:
 				@make -C $(LIBRARIES)$(MLX)
+
+libft:
+				@make -C Libft
+
+42_printf:
+				@make -C ft_printf
 
 all:			$(NAME)
 
@@ -70,6 +76,7 @@ clean:
 fclean:			clean
 				@$(RM) $(NAME)
 				@make fclean -C Libft
+				@make fclean -C ft_printf
 				@make clean -C $(LIBRARIES)$(MLX)
 				@echo "$(CYAN) FRACTOL - Bath is so good!  Now it's over. 🧼✨$(RESET)"
 

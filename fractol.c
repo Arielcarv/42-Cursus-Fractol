@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:00:54 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/05 17:49:38 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:11:25 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ static void	set_pixel_color(char *buf, int x, int y, int color)
 	int	blue = 0x0000FF;
 	// int	red = 300;
 	// int	green = 0xFF << 24 | 255 << 16 | 0 << 8 | 0;
-	// printf("GREEN %d, YELLOW: %d\n", green, yellow);
+	// ft_printf("GREEN %d, YELLOW: %d\n", green, yellow);
 	if ( y == 0 || y == WINDOW_HEIGHT - 1 || x == 0 || x == WINDOW_WIDTH - 1)
 	{
-		// printf("BUFFER: %d\n", x * 4 + y * WINDOW_WIDTH * 4);
+		// ft_printf("BUFFER: %d\n", x * 4 + y * WINDOW_WIDTH * 4);
 		// buf[x * 4 + y * WINDOW_WIDTH * 4] = 255;		//blue;
 		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 1] = 255;	//green;
 		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 2] = 255;	//red;
 		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 3] = 255;	//black;
-		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 3] = 255;	//black;
+		buf[x * 4 + y * WINDOW_WIDTH * 4 + 3] = 255 >> 24;	//black;
 	}
 	else
 	{
 		// buf[x * 4 + y * WINDOW_WIDTH * 4] = 255;			//blue;
 		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 1] = 0xFF;	// green
 		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 2] = 0xFF;	// red
-		// buf[x * 4 + y * WINDOW_WIDTH * 4 + 3] = 0xFF;	//black
+		buf[x * 4 + y * WINDOW_WIDTH * 4 + 3] = 0xFF;	//black
 	}
 }
 
@@ -47,7 +47,7 @@ void	render_fractal(t_fractol *params)
 	mlx_clear_window(params->mlx, params->mlx_win);
 	params->img = mlx_new_image(params->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	params->buff = mlx_get_data_addr(params->img, &params->bits_per_pixel,
-				&params->line_size, &params->endian);
+			&params->line_size, &params->endian);
 	y = -1;
 	while (++y < WINDOW_HEIGHT)
 	{
@@ -60,10 +60,15 @@ void	render_fractal(t_fractol *params)
 	mlx_put_image_to_window(params->mlx, params->mlx_win, params->img, 0, 0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_fractol	params;
 
+	if (argc != 2)
+	{
+		ft_printf("Usage: ./fractol <fractal_name>\n");
+		return (0);
+	}
 	initialize_params(&params);
 	open_window(&params);
 	render_fractal(&params);

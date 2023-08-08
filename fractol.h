@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:18:55 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/05 16:17:40 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:47:21 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # endif
 
 # include "Libft/libft.h"
+# include "ft_printf/ft_printf.h"
 # include <stdio.h>
 
 # define WINDOW_WIDTH 640
