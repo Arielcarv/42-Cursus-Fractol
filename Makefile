@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/08/08 19:10:26 by arcarval         ###   ########.fr        #
+#    Updated: 2023/08/08 19:31:43 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ WHITE			=	\033[0;37m
 YELLOW			=	\033[0;33m
 
 # FRACTOL
-NAME			=	fractol.a
+NAME			=	fractol
 HEADER			=	fractol.h
 LIBFT			=	./Libft/libft.a
 FT_PRINTF		=	./ft_printf/libftprintf.a
@@ -53,8 +53,7 @@ endif
 				@echo "$(ORANGE) Compiling  ➟  $(BLUE)$< $(WHITE)"
 				@$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -c $< -o $@
 
-$(NAME):		minilibx libft 42_printf $(FRACTOL_OBJS)
-				@echo "$(MAGENTA)\n $(NAME)  🗄️  🗃️  Archived ✓$(RESET)"
+$(NAME):		minilibx libft printf $(FRACTOL_OBJS)
 				$(CC) $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 				@echo "$(CYAN) FRACTOL - I'm ready to work! 🧠$(RESET)"
 
@@ -64,7 +63,7 @@ minilibx:
 libft:
 				@make -C Libft
 
-42_printf:
+printf:
 				@make -C ft_printf
 
 all:			$(NAME)
