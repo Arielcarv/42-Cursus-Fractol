@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:18:55 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/08 18:47:21 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:41:26 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,22 @@
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
 
+typedef struct s_complex {
+	double	re;
+	double	im;
+}			t_complex;
+
 typedef struct s_fractol {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*buff;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
+	void		*mlx;
+	void		*mlx_win;
+	void		*img;
+	char		*buff;
+	int			bits_per_pixel;
+	int			line_size;
+	int			endian;
+	t_complex	c;
+	t_complex	z;
+	int			interation;
 }			t_fractol;
 
 void	initialize_params(t_fractol *params);
