@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/08/08 19:31:43 by arcarval         ###   ########.fr        #
+#    Updated: 2023/08/15 17:59:11 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBRARIES		=	./libraries/
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 
-FRACTOL_SRCS	=	fractol.c initialize.c hooks.c
+FRACTOL_SRCS	=	fractol.c initialize.c hooks.c utilities.c
 FRACTOL_OBJS	=	$(FRACTOL_SRCS:%.c=%.o)
 
 AR				=	ar -rcs
@@ -54,7 +54,7 @@ endif
 				@$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -c $< -o $@
 
 $(NAME):		minilibx libft printf $(FRACTOL_OBJS)
-				$(CC) $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
+				$(CC) -lm $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 				@echo "$(CYAN) FRACTOL - I'm ready to work! 🧠$(RESET)"
 
 minilibx:

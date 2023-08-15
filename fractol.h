@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:18:55 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/08 18:47:21 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:52:34 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "ft_printf/ft_printf.h"
 # include <stdio.h>
 
-# define WINDOW_WIDTH 640
-# define WINDOW_HEIGHT 480
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 1000
 
 // KEYBOARD KEYS
 # define CLOSE_BUTTON 17
@@ -52,14 +52,24 @@
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
 
+typedef struct s_complex {
+	double	re;
+	double	im;
+}				t_complex;
+
 typedef struct s_fractol {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*buff;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
+	void		*mlx;
+	void		*mlx_win;
+	void		*img;
+	char		*buff;
+	int			bits_per_pixel;
+	int			line_size;
+	int			endian;
+	double		min_re;
+	double		max_im;
+	t_complex	z;
+	t_complex	c;
+	int	interations;
 }			t_fractol;
 
 void	initialize_params(t_fractol *params);
@@ -67,5 +77,6 @@ void	open_window(t_fractol *params);
 int		close_window(t_fractol *params);
 int		key_events_handler(int keysym, t_fractol *params);
 int		mouse_events_handler(int keysym, t_fractol *params);
+int		interations(t_fractol *params);
 
 #endif
