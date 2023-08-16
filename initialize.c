@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:19:35 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/05 17:00:35 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:23:40 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	initialize_params(t_fractol *params)
 	params->bits_per_pixel = 0;
 	params->line_size = 0;
 	params->endian = 0;
+	params->zoom = 1.0;
+	params->min_re = -2.0;
+	params->max_im = 2.0;
+	params->key_x = 0.0;
+	params->key_y = 0.0;
 }
 
 void	open_window(t_fractol *params)

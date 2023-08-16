@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:18:55 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/15 18:52:34 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/16 19:47:01 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,18 @@ typedef struct s_fractol {
 	int			endian;
 	double		min_re;
 	double		max_im;
+	double		key_x;
+	double		key_y;
 	t_complex	z;
 	t_complex	c;
-	int	interations;
+	int			interations;
+	double		zoom;
 }			t_fractol;
 
 void	initialize_params(t_fractol *params);
 void	open_window(t_fractol *params);
-int		close_window(t_fractol *params);
-int		key_events_handler(int keysym, t_fractol *params);
-int		mouse_events_handler(int keysym, t_fractol *params);
+void	set_hooks(t_fractol *params);
 int		interations(t_fractol *params);
+void	render_fractal(t_fractol *params);
 
 #endif
