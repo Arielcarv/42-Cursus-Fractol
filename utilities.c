@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:58 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/17 12:15:20 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:24:22 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ int	rotate_color(t_fractol *params, int i)
 		return (0);
 	n = 3;
 	while (--n >= 1)
-		i = (i * params->color) / 32;
+		i = (i * params->color) / 64;
 	return (i);
 }

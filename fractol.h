@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:18:55 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/17 12:21:08 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:26:07 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	set_hooks(t_fractol *params);
 int		interations(t_fractol *params);
 void	render_fractal(t_fractol *params);
 void	mandelbrot(t_fractol *params);
+void	julia(t_fractol *params);
 void	my_mlx_pixel_put(t_fractol *fractol, int x, int y, int color);
 int		rotate_color(t_fractol *params, int i);
 int		validate_input(int argc, char **argv, t_fractol *params);

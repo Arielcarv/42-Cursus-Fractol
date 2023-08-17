@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/08/17 12:21:39 by arcarval         ###   ########.fr        #
+#    Updated: 2023/08/17 16:27:23 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ LIBRARIES		=	./libraries/
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 
-FRACTOL_SRCS	=	fractol.c initialize.c hooks.c utilities.c validations.c mandelbrot.c
+FRACTOL_SRCS	=	fractol.c initialize.c hooks.c utilities.c \
+					validations.c mandelbrot.c julia.c
 FRACTOL_OBJS	=	$(FRACTOL_SRCS:%.c=%.o)
 
 AR				=	ar -rcs
@@ -41,7 +42,7 @@ RM				=	rm -rf
 ####  SELECT OS ####
 ####################
 ifeq ($(shell uname), Linux)
-	CFLAGS = 
+	CFLAGS = -Wall -Wextra -Werror
 	MLX = minilibx-linux
 	MLX_LINKS = -lbsd -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) $(LIBRARIES)$(MLX)/libmlx_Linux.a -L/usr/lib  -lmlx -lXext -lX11 -lm -lz
 else ifeq ($(shell uname), Darwin)
@@ -54,7 +55,7 @@ endif
 				@$(CC) $(CFLAGS) -I/usr/include -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -c $< -o $@
 
 $(NAME):		minilibx libft printf $(FRACTOL_OBJS)
-				$(CC) -lm $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
+				$(CC) $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 				@echo "$(CYAN) FRACTOL - I'm ready to work! 🧠$(RESET)"
 
 minilibx:
