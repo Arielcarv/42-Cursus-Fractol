@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:58 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/15 19:51:18 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/17 12:15:20 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	interations(t_fractol *params)
 {
 	double	z_re_temp;
-	
+
 	params->interations = 0;
 	while (params->interations < 255)
 	{
@@ -29,4 +29,69 @@ int	interations(t_fractol *params)
 		params->interations++;
 	}
 	return (params->interations);
+}
+
+static int	atod_check(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != 0)
+	{
+		if ((s[i] >= '0' && s[i] <= '9') || s[i] == '.' || s[0] == '-')
+			i++;
+		else
+			return (-5);
+	}
+	return (0);
+}
+
+double	ft_atod(char *s)
+{
+	int		i;
+	int		len;
+	double	res;
+	double	dec;
+
+	if (atod_check(s) == -5)
+		return (-5);
+	res = ft_atoi(s);
+	i = 0;
+	while (s[i] != 0 && s[i] != '.')
+		i++;
+	len = 0;
+	dec = 0.0;
+	if (s[i] == '.')
+	{
+		i++;
+		dec = ft_atoi(&s[i]);
+		while (s[i++] != 0)
+			len++;
+	}
+	while (len-- > 0)
+		dec /= 10;
+	if (s[0] == '-' && (res + dec) != 0.0)
+		return (-(res + dec));
+	return (res + dec);
+}
+
+void	my_mlx_pixel_put(t_fractol *fractol, int x, int y, int color)
+{
+	char	*dest;
+
+	dest = fractol->buff + (y * fractol->line_size + x
+			* (fractol->bits_per_pixel / 8));
+	*(unsigned int *)dest = color;
+}
+
+int	rotate_color(t_fractol *params, int i)
+{
+	int	n;
+
+	if (params->interations == 255)
+		return (0);
+	n = 3;
+	while (--n >= 1)
+		i = (i * params->color) / 32;
+	return (i);
 }

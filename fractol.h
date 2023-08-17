@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:18:55 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/16 19:47:01 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/17 12:21:08 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "Libft/libft.h"
 # include "ft_printf/ft_printf.h"
 # include <stdio.h>
+# include <math.h>
 
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 1000
@@ -58,21 +59,27 @@ typedef struct s_complex {
 }				t_complex;
 
 typedef struct s_fractol {
-	void		*mlx;
-	void		*mlx_win;
-	void		*img;
-	char		*buff;
-	int			bits_per_pixel;
-	int			line_size;
-	int			endian;
-	double		min_re;
-	double		max_im;
-	double		key_x;
-	double		key_y;
-	t_complex	z;
-	t_complex	c;
-	int			interations;
-	double		zoom;
+	void			*mlx;
+	void			*mlx_win;
+	void			*img;
+	char			*buff;
+	int				bits_per_pixel;
+	int				line_size;
+	int				endian;
+	double			p_re;
+	double			p_im;
+	double			min_re;
+	double			max_re;
+	double			min_im;
+	double			max_im;
+	double			key_x;
+	double			key_y;
+	t_complex		z;
+	t_complex		c;
+	int				interations;
+	double			zoom;
+	unsigned int	color;
+	int				validation;
 }			t_fractol;
 
 void	initialize_params(t_fractol *params);
@@ -80,5 +87,10 @@ void	open_window(t_fractol *params);
 void	set_hooks(t_fractol *params);
 int		interations(t_fractol *params);
 void	render_fractal(t_fractol *params);
+void	mandelbrot(t_fractol *params);
+void	my_mlx_pixel_put(t_fractol *fractol, int x, int y, int color);
+int		rotate_color(t_fractol *params, int i);
+int		validate_input(int argc, char **argv, t_fractol *params);
+double	ft_atod(char *s);
 
 #endif
