@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:00:54 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/17 17:03:02 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:23:05 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	render_fractal(t_fractol *params)
 		mandelbrot(params);
 	if (params->validation == 2)
 	{
-		printf("\nC.RE: %f", params->c.re);
-		printf("\nC.IM: %f", params->c.im);
 		julia(params);
 	}
 	mlx_put_image_to_window(params->mlx, params->mlx_win, params->img, 0, 0);

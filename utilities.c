@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:58 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/17 15:24:22 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:21:58 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,46 +34,52 @@ int	interations(t_fractol *params)
 static int	atod_check(char *s)
 {
 	int	i;
+	int	sign;
 
 	i = 0;
+	sign = 1;
 	while (s[i] != 0)
 	{
 		if ((s[i] >= '0' && s[i] <= '9') || s[i] == '.' || s[0] == '-')
+		{
+			if (s[i] == '-')
+				sign = -1;
 			i++;
+		}
 		else
-			return (-5);
+			return (2);
 	}
-	return (0);
+	return (sign);
 }
 
 double	ft_atod(char *s)
 {
 	int		i;
-	int		len;
-	double	res;
-	double	dec;
+	int		sign;
+	double	result;
+	double	decimal;
+	double	div;
 
-	if (atod_check(s) == -5)
+	sign = atod_check(s);
+	if (sign == 2)
 		return (-5);
-	res = ft_atoi(s);
+	result = ft_atoi(s);
 	i = 0;
 	while (s[i] != 0 && s[i] != '.')
 		i++;
-	len = 0;
-	dec = 0.0;
-	if (s[i] == '.')
+	decimal = 0.0;
+	div = 0;
+	if (s[i++] == '.')
 	{
-		i++;
-		dec = ft_atoi(&s[i]);
+		decimal = ft_atoi(&s[i]);
 		while (s[i++] != 0)
-			len++;
+			div++;
 	}
-	while (len-- > 0)
-		dec /= 10;
-	if (s[0] == '-' && (res + dec) != 0.0)
-		return (-(res + dec));
-	return (res + dec);
+	while (div-- > 0)
+		decimal /= 10;
+	return (result + (sign * decimal));
 }
+
 
 void	my_mlx_pixel_put(t_fractol *fractol, int x, int y, int color)
 {

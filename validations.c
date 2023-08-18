@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:21:05 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/17 16:55:35 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:24:27 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	validate_input(int argc, char **argv, t_fractol *params)
 		params->validation = 1;
 	}
 	else if (argc == 4 && (ft_strncmp(argv[1], "julia", 5) == 0)
-		&& ft_atod(argv[2]) != -5 && ft_atod(argv[3]) != -5)
+		&& (ft_atod(argv[2]) >= -2.0 && ft_atod(argv[2]) <= 2.0)
+		&& (ft_atod(argv[3]) >= -2.0 && ft_atod(argv[3]) <= 2.0))
 	{
 		params->validation = 2;
 		params->c.re = ft_atod(argv[2]);
