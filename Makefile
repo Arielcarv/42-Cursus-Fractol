@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/08/17 16:27:23 by arcarval         ###   ########.fr        #
+#    Updated: 2023/08/18 18:45:42 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,8 @@ RM				=	rm -rf
 ####  SELECT OS ####
 ####################
 ifeq ($(shell uname), Linux)
-	CFLAGS = -Wall -Wextra -Werror
 	MLX = minilibx-linux
-	MLX_LINKS = -lbsd -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) $(LIBRARIES)$(MLX)/libmlx_Linux.a -L/usr/lib  -lmlx -lXext -lX11 -lm -lz
+	MLX_LINKS = -lbsd -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) $(LIBRARIES)$(MLX)/libmlx_Linux.a -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 else ifeq ($(shell uname), Darwin)
 	MLX = minilibx-macos
 	MLX_LINKS = -I$(LIBRARIES)$(MLX) -L$(LIBRARIES)$(MLX) -lmlx -framework OpenGL -framework AppKit

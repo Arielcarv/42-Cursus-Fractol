@@ -6,12 +6,11 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:13:58 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/18 18:21:58 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:31:57 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 
 int	interations(t_fractol *params)
 {
@@ -79,7 +78,6 @@ double	ft_atod(char *s)
 		decimal /= 10;
 	return (result + (sign * decimal));
 }
-
 
 void	my_mlx_pixel_put(t_fractol *fractol, int x, int y, int color)
 {
