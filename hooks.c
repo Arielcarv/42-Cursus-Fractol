@@ -23,9 +23,9 @@ int	close_window(t_fractol *params)
 	// 	free(params);
 	// 	free(params->mlx);
 	// }
-	mlx_clear_window(params->mlx, params->mlx_win);
+    mlx_destroy_image(params->mlx, params->img);
+//	mlx_clear_window(params->mlx, params->mlx_win);
 	mlx_destroy_window(params->mlx, params->mlx_win);
-	// mlx_destroy_image(params->mlx, params->img);
 	exit(0);
 	// return (0);
 }
