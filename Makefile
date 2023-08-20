@@ -11,32 +11,36 @@
 # **************************************************************************** #
 
 # Colors
-BLACK			=	\033[0;30m
-BLUE			=	\033[0;34m
-CYAN			=	\033[0;36m
-GREEN			=	\033[0;32m
-MAGENTA			=	\033[1;35m
-ORANGE			=	\033[1;38;5;214m
-RED				=	\033[0;31m
-RESET			=	\033[0m
-WHITE			=	\033[0;37m
-YELLOW			=	\033[0;33m
+BLACK				=	\033[0;30m
+BLUE				=	\033[0;34m
+CYAN				=	\033[0;36m
+GREEN				=	\033[0;32m
+MAGENTA				=	\033[1;35m
+ORANGE				=	\033[1;38;5;214m
+RED					=	\033[0;31m
+RESET				=	\033[0m
+WHITE				=	\033[0;37m
+YELLOW				=	\033[0;33m
 
 # FRACTOL
-NAME			=	fractol
-HEADER			=	fractol.h
-LIBFT			=	./Libft/libft.a
-FT_PRINTF		=	./ft_printf/libftprintf.a
-LIBRARIES		=	./libraries/
-CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+NAME				=	fractol
+HEADER				=	fractol.h
+LIBFT				=	./Libft/libft.a
+FT_PRINTF			=	./ft_printf/libftprintf.a
+LIBRARIES			=	./libraries/
+CC					=	cc
+CFLAGS				=	-Wall -Wextra -Werror
 
-FRACTOL_SRCS	=	fractol.c initialize.c hooks.c utilities.c \
-					validations.c mandelbrot.c julia.c
-FRACTOL_OBJS	=	$(FRACTOL_SRCS:%.c=%.o)
+FRACTOL_SRCS		=	fractol.c initialize.c hooks.c utilities.c \
+						validations.c mandelbrot.c julia.c
+FRACTOL_OBJS		=	$(FRACTOL_SRCS:%.c=%.o)
 
-AR				=	ar -rcs
-RM				=	rm -rf
+FRACTOL_BONUS_SRCS	=	fractol_bonus.c initialize.c hooks.c utilities.c \
+						validations_bonus.c mandelbrot.c julia.c burning_ship.c
+FRACTOL_BONUS_OBJS	=	$(FRACTOL_BONUS_SRCS:%.c=%.o)
+
+AR					=	ar -rcs
+RM					=	rm -rf
 
 ####################
 ####  SELECT OS ####
@@ -57,6 +61,10 @@ $(NAME):		minilibx libft printf $(FRACTOL_OBJS)
 				$(CC) $(FRACTOL_OBJS) $(MLX_LINKS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 				@echo "$(CYAN) FRACTOL - I'm ready to work! 🧠$(RESET)"
 
+bonus:			minilibx libft printf $(FRACTOL_BONUS_OBJS)
+				$(CC) $(FRACTOL_BONUS_OBJS) $(MLX_LINKS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
+				@echo "$(CYAN) FRACTOL - I'm ready to work! 🧠$(RESET)"
+
 minilibx:
 				@make -C $(LIBRARIES)$(MLX)
 
@@ -68,8 +76,10 @@ printf:
 
 all:			$(NAME)
 
+bonus:			bonus
+
 clean:
-				@$(RM) $(FRACTOL_OBJS)
+				@$(RM) $(FRACTOL_OBJS) $(FRACTOL_BONUS_OBJS)
 				@echo "$(CYAN) FRACTOL - Bye Laziness, Bye dirt 🚿$(RESET)"
 
 fclean:			clean
