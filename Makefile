@@ -80,7 +80,7 @@ fclean:			clean
 				@echo "$(CYAN) FRACTOL - Bath is so good!  Now it's over. 🧼✨$(RESET)"
 
 nn:
-				norminette -R CheckForbiddenSourceHeader $(FRACTOL_SRCS) $(HEADER) ./Libft/*.c ./Libft/*.h
+				norminette -R CheckForbiddenSourceHeader $(FRACTOL_SRCS) $(HEADER) ./Libft/*.c ./Libft/*.h ./ft_printf/*.c ./ft_printf/*.h
 
 re:				fclean all
 
