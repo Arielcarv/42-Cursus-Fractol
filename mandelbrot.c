@@ -43,7 +43,7 @@ void	mandelbrot(t_fractol *params)
 			params->c.re = params->p_re;
 			params->c.im = params->p_im;
 			my_mlx_pixel_put(params, x, y,
-				rotate_color(params, interations(params)));
+				rotate_color(params, iterations(params)));
 		}
 		params->p_re = params->min_re;
 	}

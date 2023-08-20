@@ -41,7 +41,7 @@ void	julia(t_fractol *params)
 			params->z.re = params->p_re;
 			params->z.im = params->p_im;
 			my_mlx_pixel_put(params, x, y,
-				rotate_color(params, interations(params)));
+				rotate_color(params, iterations(params)));
 		}
 		params->p_re = params->min_re;
 	}

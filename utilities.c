@@ -12,12 +12,12 @@
 
 #include "fractol.h"
 
-int	interations(t_fractol *params)
+int	iterations(t_fractol *params)
 {
 	double	z_re_temp;
 
-	params->interations = 0;
-	while (params->interations < 255)
+	params->iterations = 0;
+	while (params->iterations < 255)
 	{
 		z_re_temp = params->z.re;
 		params->z.re = ((params->z.re * params->z.re)
@@ -25,9 +25,9 @@ int	interations(t_fractol *params)
 		params->z.im = (2 * z_re_temp * params->z.im) + params->c.im;
 		if (((params->z.re * params->z.re) + (params->z.im * params->z.im)) > 4)
 			break ;
-		params->interations++;
+		params->iterations++;
 	}
-	return (params->interations);
+	return (params->iterations);
 }
 
 static int	atod_check(char *s)
@@ -92,7 +92,7 @@ int	rotate_color(t_fractol *params, int i)
 {
 	int	n;
 
-	if (params->interations == 255)
+	if (params->iterations == 255)
 		return (0);
 	n = 3;
 	while (--n >= 1)

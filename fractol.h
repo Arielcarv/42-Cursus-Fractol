@@ -29,27 +29,13 @@
 
 // KEYBOARD KEYS
 # define CLOSE_BUTTON 17
-# define KEY_SPACE 32
-# define KEY_ZERO 48
 # define KEY_ONE 49
-# define KEY_TWO 50
-# define KEY_THREE 51
-# define KEY_FOUR 52
-# define KEY_FIVE 53
-# define KEY_PLUS 43
-# define KEY_MINUS 45
-# define KEY_A 97
-# define KEY_B 98
-# define KEY_C 99
-# define KEY_D 100
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
 # define KEY_UP 65362
 # define KEY_RIGHT 65363
 # define KEY_DOWN 65364
-# define MOUSE_LEFT 1
-# define MOUSE_MIDDLE 2
-# define MOUSE_RIGHT 3
+
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
 
@@ -76,7 +62,7 @@ typedef struct s_fractol {
 	double			key_y;
 	t_complex		z;
 	t_complex		c;
-	int				interations;
+	int				iterations;
 	double			zoom;
 	unsigned int	color;
 	int				validation;
@@ -85,10 +71,11 @@ typedef struct s_fractol {
 void	initialize_params(t_fractol *params);
 void	open_window(t_fractol *params);
 void	set_hooks(t_fractol *params);
-int		interations(t_fractol *params);
+int		iterations(t_fractol *params);
 void	render_fractal(t_fractol *params);
 void	mandelbrot(t_fractol *params);
 void	julia(t_fractol *params);
+void	burning_ship(t_fractol *params);
 void	my_mlx_pixel_put(t_fractol *fractol, int x, int y, int color);
 int		rotate_color(t_fractol *params, int i);
 int		validate_input(int argc, char **argv, t_fractol *params);
