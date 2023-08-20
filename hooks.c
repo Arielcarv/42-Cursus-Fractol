@@ -15,25 +15,17 @@
 int	close_window(t_fractol *params)
 {
 	mlx_loop_end(params->mlx);
-	// mlx_destroy_display(params->mlx);
-	// if (params->mlx_win)
-	// {
-	// 	ft_bzero(params->buff, WINDOW_WIDTH * WINDOW_HEIGHT * (params->bits_per_pixel / 8));
-	// 	mlx_destroy_image(params->mlx, params->img);
-	// 	free(params);
-	// 	free(params->mlx);
-	// }
-    mlx_destroy_image(params->mlx, params->img);
-//	mlx_clear_window(params->mlx, params->mlx_win);
+	mlx_destroy_image(params->mlx, params->img);
 	mlx_destroy_window(params->mlx, params->mlx_win);
+	mlx_destroy_display(params->mlx);
+	free(params->mlx);
 	exit(0);
-	// return (0);
 }
 
 int	key_events_handler(int keysym, t_fractol *params)
 {
 	if (keysym == KEY_ESC)
-		close_window(params->mlx);
+		close_window(params);
 	else if (keysym == KEY_DOWN)
 		params->key_y -= 0.2 * params->zoom;
 	else if (keysym == KEY_UP)
