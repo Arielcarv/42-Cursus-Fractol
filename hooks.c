@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 13:23:29 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/17 16:53:37 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:46:16 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	close_window(t_fractol *params)
 {
 	mlx_loop_end(params->mlx);
+	mlx_clear_window(params->mlx, params->mlx_win);
 	mlx_destroy_image(params->mlx, params->img);
 	mlx_destroy_window(params->mlx, params->mlx_win);
 	mlx_destroy_display(params->mlx);
@@ -41,6 +42,7 @@ int	key_events_handler(int keysym, t_fractol *params)
 		else
 			params->color = params->color << 4;
 	}
+	mlx_destroy_image(params->mlx, params->img);
 	render_fractal(params);
 	return (0);
 }
@@ -61,6 +63,7 @@ int	mouse_events_handler(int keysym, int x, int y, t_fractol *params)
 		params->key_x -= 0.05;
 		params->key_y += 0.05;
 	}
+	mlx_destroy_image(params->mlx, params->img);
 	render_fractal(params);
 	return (0);
 }

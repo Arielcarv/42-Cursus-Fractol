@@ -6,7 +6,7 @@
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:00:54 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/18 18:23:05 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:39:36 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	render_fractal(t_fractol *params)
 {
-	mlx_clear_window(params->mlx, params->mlx_win);
 	params->img = mlx_new_image(params->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	params->buff = mlx_get_data_addr(params->img, &params->bits_per_pixel,
 			&params->line_size, &params->endian);
@@ -24,6 +23,7 @@ void	render_fractal(t_fractol *params)
 	{
 		julia(params);
 	}
+	mlx_clear_window(params->mlx, params->mlx_win);
 	mlx_put_image_to_window(params->mlx, params->mlx_win, params->img, 0, 0);
 }
 
