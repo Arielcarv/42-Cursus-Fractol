@@ -6,7 +6,7 @@
 #    By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 22:31:07 by arcarval          #+#    #+#              #
-#    Updated: 2023/08/22 16:03:09 by arcarval         ###   ########.fr        #
+#    Updated: 2023/08/22 16:35:37 by arcarval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ bonus:			minilibx libft printf $(FRACTOL_BONUS_OBJS)
 				@echo "$(CYAN) FRACTOL - I'm ready to work! 🧠$(RESET)"
 
 minilibx:
+				cd libraries && tar -xvf minilibx-linux.tgz
 				@make -C $(LIBRARIES)$(MLX)
 
 libft:
