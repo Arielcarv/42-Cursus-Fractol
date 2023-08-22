@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validations.c                                      :+:      :+:    :+:   */
+/*   validations_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arcarval <arcarval@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:21:05 by arcarval          #+#    #+#             */
-/*   Updated: 2023/08/18 18:24:27 by arcarval         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:00:16 by arcarval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	print_instructions(void)
 {
 	ft_printf("\n\033[0;31mExamples of valid arguments:\033[0m"
-		"\nMandelbrot"
-		"\nJulia  0.285  0.01"
-		"\nJulia -0.8    0.156"
-		"\nJulia -0.835 -0.2321"
-		"\nJulia -1.037  0.17"
-		"\nJulia -0.52   0.57"
-		"\nJulia  0.285  0.50"
-		"\nBurning Ship"
+		"\nmandelbrot"
+		"\njulia   0.285   0.01"
+		"\njulia  -0.8     0.156"
+		"\njulia  -0.835  -0.2321"
+		"\njulia  -1.037   0.17"
+		"\njulia  -0.52    0.57"
+		"\njulia   0.285   0.50"
+		"\nburning ship"
 		"\n");
 	return (1);
 }
